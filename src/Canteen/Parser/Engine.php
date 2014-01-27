@@ -6,7 +6,6 @@
 namespace Canteen\Parser
 {
 	use Canteen\Profiler\Profiler;
-	use Canteen\Utilities\BooleanUtils;
 
 	/**
 	*  The parser engine does the actual string substitutions

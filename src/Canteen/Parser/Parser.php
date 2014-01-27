@@ -12,8 +12,6 @@ namespace Canteen\Parser
 	*  Located in the namespace __Canteen\Parser__.
 	*  
 	*  @class Parser
-	*  @constructor
-	*  @param {Profiler} [profiler=null] The optional instance of the profiler
 	*/
 	class Parser
 	{
@@ -29,7 +27,7 @@ namespace Canteen\Parser
 		*  @property {Profiler} _profiler
 		*  @private
 		*/
-		private $_profiler;
+		private $_profiler = null;
 		
 		/** 
 		*  The maximum number of loops to parse before bailing
@@ -41,10 +39,19 @@ namespace Canteen\Parser
 		/**
 		*  Create the loader
 		*/
-		public function __construct(Profiler $profiler=null)
+		public function __construct()
+		{
+			$this->_templates = [];
+		}
+
+		/**
+		*  Attach an optional Profiler to the parser for debugging purposes
+		*  @method setProfiler
+		*  @param {Profiler} profiler
+		*/
+		public function setProfiler(Profiler $profiler)
 		{
 			$this->_profiler = $profiler;
-			$this->_templates = [];
 		}
 		
 		/**
