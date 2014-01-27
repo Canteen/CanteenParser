@@ -84,7 +84,7 @@
             "module": "Canteen\\Parser",
             "namespace": "",
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 11,
+            "line": 10,
             "description": "The parser engine does the actual string substitutions"
         },
         "Lexer": {
@@ -113,17 +113,7 @@
             "namespace": "",
             "file": "src/Canteen/Parser/Parser.php",
             "line": 10,
-            "description": "Simple string parser and template API to use for doing html substitutions. \nLocated in the namespace __Canteen\\Parser__.",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "profiler",
-                    "description": "The optional instance of the profiler",
-                    "type": "Profiler",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ]
+            "description": "Simple string parser and template API to use for doing html substitutions. \nLocated in the namespace __Canteen\\Parser__."
         },
         "ParserError": {
             "name": "ParserError",
@@ -180,7 +170,7 @@
     "classitems": [
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 17,
+            "line": 16,
             "description": "Prepare the site content to be displayed\nThis does all of the data substitutions and url fixes. The order of operations\nis to do the templates, loops, if blocks, then individual substitutions.",
             "itemtype": "method",
             "name": "parse",
@@ -213,7 +203,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 192,
+            "line": 191,
             "description": "Get the nested value for a dot-syntax array/object lookup\nFor instance, `getNextVar($substitutions, 'event.name')`",
             "itemtype": "method",
             "name": "lookupValue",
@@ -240,7 +230,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 222,
+            "line": 221,
             "description": "Global functions to check for a string-based boolean",
             "itemtype": "method",
             "name": "asBoolean",
@@ -261,7 +251,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 236,
+            "line": 235,
             "description": "The default backtrack limit for preg expressions is 100KB, \nwe may have pages which ar larger than 100,000, and \nneed to increase the pcre.backtrack_limit",
             "itemtype": "method",
             "name": "checkBacktrackLimit",
@@ -395,7 +385,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 20,
+            "line": 18,
             "description": "The list of valid templates",
             "itemtype": "property",
             "name": "_templates",
@@ -407,7 +397,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 27,
+            "line": 25,
             "description": "The instance of the profiler",
             "itemtype": "property",
             "name": "_profiler",
@@ -419,7 +409,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 34,
+            "line": 32,
             "description": "The maximum number of loops to parse before bailing",
             "itemtype": "property",
             "name": "limit",
@@ -430,14 +420,30 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 41,
+            "line": 39,
             "description": "Create the loader",
             "class": "Parser",
             "module": "Canteen\\Parser"
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 50,
+            "line": 47,
+            "description": "Attach an optional Profiler to the parser for debugging purposes",
+            "itemtype": "method",
+            "name": "setProfiler",
+            "params": [
+                {
+                    "name": "profiler",
+                    "description": "",
+                    "type": "Profiler"
+                }
+            ],
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 57,
             "description": "Add a single template",
             "itemtype": "method",
             "name": "addTemplate",
@@ -458,7 +464,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 65,
+            "line": 72,
             "description": "Register a JSON manfest which is an array that contains template files\nthe templates paths should be relative to the location of the manifest file.",
             "itemtype": "method",
             "name": "addManifest",
@@ -474,7 +480,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 89,
+            "line": 96,
             "description": "Load a JSON file from a path, does the error checking",
             "itemtype": "method",
             "name": "load",
@@ -503,7 +509,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 113,
+            "line": 120,
             "description": "Get the last JSON error message",
             "itemtype": "method",
             "name": "lastJsonError",
@@ -518,7 +524,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 147,
+            "line": 154,
             "description": "Get a template by name",
             "itemtype": "method",
             "name": "getPath",
@@ -538,7 +544,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 162,
+            "line": 169,
             "description": "Get a template content",
             "itemtype": "method",
             "name": "getContents",
@@ -558,7 +564,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 183,
+            "line": 190,
             "description": "Prepare the site content to be displayed\nThis does all of the data substitutions and url fixes. The order of operations\nis to do the templates, loops, if blocks, then individual substitutions.",
             "itemtype": "method",
             "name": "parse",
@@ -583,7 +589,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 198,
+            "line": 205,
             "description": "Get the template by form name",
             "itemtype": "method",
             "name": "template",
@@ -606,7 +612,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 209,
+            "line": 216,
             "description": "Check to see if a string contains a sub tag",
             "itemtype": "method",
             "name": "contains",
@@ -631,7 +637,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 221,
+            "line": 228,
             "description": "Remove the empty substitution tags",
             "itemtype": "method",
             "name": "removeEmpties",
@@ -651,7 +657,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 234,
+            "line": 241,
             "description": "Parse a url with substitutions",
             "itemtype": "method",
             "name": "parseFile",
@@ -676,7 +682,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 255,
+            "line": 262,
             "description": "Replaces any path (href/src) with the base",
             "itemtype": "method",
             "name": "fixPath",
@@ -848,7 +854,7 @@
     "warnings": [
         {
             "message": "Missing item type\nCreate the loader",
-            "line": " src/Canteen/Parser/Parser.php:41"
+            "line": " src/Canteen/Parser/Parser.php:39"
         },
         {
             "message": "Missing item type\nCreate the Canteen error",
