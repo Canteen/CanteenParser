@@ -35,6 +35,14 @@ namespace Canteen\Parser
 		*  @default 10000
 		*/
 		public $limit = 10000;
+
+
+		/**
+		*  The map of file name to template contents
+		*  @property {Dictionary} _cache
+		*  @default []
+		*/
+		private $_cache = [];
 	
 		/**
 		*  Create the loader
@@ -146,7 +154,7 @@ namespace Canteen\Parser
 				{
 					$errors[JSON_ERROR_UTF8] = 'Malformed UTF-8 characters, possibly incorrectly encoded';
 				}
-				return ifsetor($errors[json_last_error()], '');
+				return isset($errors[json_last_error()]) ? $errors[json_last_error()] : '';
 			}
 			return '';
 		}
@@ -170,18 +178,28 @@ namespace Canteen\Parser
 		*  Get a template content 
 		*  @method getContents
 		*  @param {String} The name of the template
+		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*    templates that are requested multiple times.
 		*  @return {String} The string contents of the template
 		*/
-		public function getContents($template)
+		public function getContents($template, $cache=false)
 		{
 			$path = $this->getPath($template);
 			
+			// Check to see if file exists in cache
+			if (isset($this->_cache[$path])) 
+				return $this->_cache[$path];
+
 			$contents = @file_get_contents($path);
 			
 			// If there's no file, don't do the rest of the regexps
 			if ($contents === false)
 			{
 				throw new ParserError(ParserError::TEMPLATE_NOT_FOUND, $path);
+			}
+			else if ($cache)
+			{
+				$this->_cache[$path] = $contents;
 			}
 			
 			return $contents;
@@ -206,11 +224,18 @@ namespace Canteen\Parser
 		*  Get the template by form name
 		*  @method template
 		*  @param {String} name The name of the template as defined in Autoloader
+		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*    templates that are requested multiple times.
 		*  @param {Dictionary} [substitutions=[]] The collection of data to substitute
 		*/
-		public function template($name, $substitutions=[])
+		public function template($name, $substitutions=[], $cache=false)
 		{
-			return Engine::parse($this, $this->getContents($name), $substitutions, $this->_profiler);
+			return Engine::parse(
+				$this, 
+				$this->getContents($name, $cache), 
+				$substitutions, 
+				$this->_profiler
+			);
 		}
 		
 		/**
@@ -243,16 +268,26 @@ namespace Canteen\Parser
 		*  @method parseFile
 		*  @param {String} url The path to the template
 		*  @param {Dictionary} substitutions The substitutions key => value replaces {{key}} in template
+		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*    templates that are requested multiple times.
 		*  @return {String} The parsed template
 		*/
-		public function parseFile($url, $substitutions)
+		public function parseFile($url, $substitutions, $cache=false)
 		{			
-			$content = @file_get_contents($url);
+			// Check to see if file exists in cache
+			if (isset($this->_cache[$path])) 
+				return $this->_cache[$path];
+
+			$contents = @file_get_contents($path);
 			
 			// If there's no file, don't do the rest of the regexps
-			if ($content === false) 
+			if ($contents === false)
 			{
-				throw new ParserError(ParserError::TEMPLATE_NOT_FOUND, $url);
+				throw new ParserError(ParserError::TEMPLATE_NOT_FOUND, $path);
+			}
+			else if ($cache)
+			{
+				$this->_cache[$path] = $contents;
 			}
 			
 			// Do a regular parse with the string
@@ -275,6 +310,15 @@ namespace Canteen\Parser
 				$content
 			);
 			return $content;
+		}
+
+		/**
+		*  Clear the cache
+		*  @method flush
+		*/
+		public function flush()
+		{
+			$this->_cache = [];
 		}
 	}
 }

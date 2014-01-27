@@ -85,10 +85,9 @@ namespace Canteen\Parser
 		/**
 		*  Create the Canteen error
 		*/
-		public function __construct($code, $data='', $messages=null)
+		public function __construct($code, $data='')
 		{
-			$messages = ifsetor($messages, self::$messages);
-			$message =  ifsetor($messages[$code], self::UNKNOWN);
+			$message =  isset(self::$messages[$code]) ? self::$messages[$code] : self::UNKNOWN;
 			
 			// If the string contains substitution strings
 			// we should apply the subs
