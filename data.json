@@ -1,0 +1,858 @@
+{
+    "project": {
+        "name": "Canteen Parser API",
+        "description": "Simple engine for rendering HTML templates.",
+        "version": "1.0.0",
+        "logo": ""
+    },
+    "files": {
+        "src/Canteen/Parser/Engine.php": {
+            "name": "src/Canteen/Parser/Engine.php",
+            "modules": {
+                "Canteen\\Parser": 1
+            },
+            "classes": {
+                "Engine": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Canteen/Parser/Lexer.php": {
+            "name": "src/Canteen/Parser/Lexer.php",
+            "modules": {},
+            "classes": {
+                "Lexer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Canteen/Parser/Parser.php": {
+            "name": "src/Canteen/Parser/Parser.php",
+            "modules": {},
+            "classes": {
+                "Parser": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Canteen/Parser/ParserError.php": {
+            "name": "src/Canteen/Parser/ParserError.php",
+            "modules": {},
+            "classes": {
+                "ParserError": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Canteen/Parser/ProfilerLabel.php": {
+            "name": "src/Canteen/Parser/ProfilerLabel.php",
+            "modules": {},
+            "classes": {
+                "ProfilerLabel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Canteen\\Parser": {
+            "name": "Canteen\\Parser",
+            "submodules": {},
+            "classes": {
+                "Engine": 1,
+                "Lexer": 1,
+                "Parser": 1,
+                "ParserError": 1,
+                "ProfilerLabel": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 8
+        }
+    },
+    "classes": {
+        "Engine": {
+            "name": "Engine",
+            "shortname": "Engine",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Canteen\\Parser",
+            "namespace": "",
+            "file": "src/Canteen/Parser/Engine.php",
+            "line": 11,
+            "description": "The parser engine does the actual string substitutions"
+        },
+        "Lexer": {
+            "name": "Lexer",
+            "shortname": "Lexer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Canteen\\Parser",
+            "namespace": "",
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 8,
+            "description": "Defines the syntax used for the the parsing"
+        },
+        "Parser": {
+            "name": "Parser",
+            "shortname": "Parser",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Canteen\\Parser",
+            "namespace": "",
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 10,
+            "description": "Simple string parser and template API to use for doing html substitutions. \nLocated in the namespace __Canteen\\Parser__.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "profiler",
+                    "description": "The optional instance of the profiler",
+                    "type": "Profiler",
+                    "optional": true,
+                    "optdefault": "null"
+                }
+            ]
+        },
+        "ParserError": {
+            "name": "ParserError",
+            "shortname": "ParserError",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Canteen\\Parser",
+            "namespace": "",
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 10,
+            "description": "Parser specific errors. Located in the namespace __Canteen\\Errors__.",
+            "extends": "Exception",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "code",
+                    "description": "The code number",
+                    "type": "Int"
+                },
+                {
+                    "name": "data",
+                    "description": "Any extra data associated with error",
+                    "type": "String|Array",
+                    "optional": true,
+                    "optdefault": "''"
+                },
+                {
+                    "name": "messages",
+                    "description": "The collection of messages to lookup",
+                    "type": "Dictionary",
+                    "optional": true,
+                    "optdefault": "null"
+                }
+            ]
+        },
+        "ProfilerLabel": {
+            "name": "ProfilerLabel",
+            "shortname": "ProfilerLabel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Canteen\\Parser",
+            "namespace": "",
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 8,
+            "description": "The label for use by the profiler"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/Canteen/Parser/Engine.php",
+            "line": 17,
+            "description": "Prepare the site content to be displayed\nThis does all of the data substitutions and url fixes. The order of operations\nis to do the templates, loops, if blocks, then individual substitutions.",
+            "itemtype": "method",
+            "name": "parse",
+            "static": 1,
+            "params": [
+                {
+                    "name": "content",
+                    "description": "The content data",
+                    "type": "String"
+                },
+                {
+                    "name": "substitutions",
+                    "description": "The substitutions key => value replaces {{key}} in template",
+                    "type": "Dictionary"
+                },
+                {
+                    "name": "profiler",
+                    "description": "Optional profiler usage to track performance",
+                    "type": "Profiler",
+                    "optional": true,
+                    "optdefault": "null"
+                }
+            ],
+            "return": {
+                "description": "The parsed template",
+                "type": "String"
+            },
+            "class": "Engine",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Engine.php",
+            "line": 192,
+            "description": "Get the nested value for a dot-syntax array/object lookup\nFor instance, `getNextVar($substitutions, 'event.name')`",
+            "itemtype": "method",
+            "name": "lookupValue",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "The associative array or object",
+                    "type": "Dictionary|Object"
+                },
+                {
+                    "name": "name",
+                    "description": "The do matrix name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The value of the lookup",
+                "type": "Mixed"
+            },
+            "class": "Engine",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Engine.php",
+            "line": 222,
+            "description": "Global functions to check for a string-based boolean",
+            "itemtype": "method",
+            "name": "asBoolean",
+            "static": 1,
+            "params": [
+                {
+                    "name": "str",
+                    "description": "The value to check as Boolean",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "A boolean value",
+                "type": "Boolean"
+            },
+            "class": "Engine",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Engine.php",
+            "line": 236,
+            "description": "The default backtrack limit for preg expressions is 100KB, \nwe may have pages which ar larger than 100,000, and \nneed to increase the pcre.backtrack_limit",
+            "itemtype": "method",
+            "name": "checkBacktrackLimit",
+            "static": 1,
+            "params": [
+                {
+                    "name": "string",
+                    "description": "The string to limit test",
+                    "type": "String"
+                }
+            ],
+            "class": "Engine",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 14,
+            "description": "Lexer for the opening of a parse tag",
+            "itemtype": "property",
+            "name": "OPEN",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'{{'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 23,
+            "description": "Lexer for the closing of a parse tag",
+            "itemtype": "property",
+            "name": "CLOSE",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'}}'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 32,
+            "description": "Lexer for definition of an if parse tag",
+            "itemtype": "property",
+            "name": "IF",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'if:'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 41,
+            "description": "Lexer for if logical operator",
+            "itemtype": "property",
+            "name": "NOT",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'!'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 50,
+            "description": "Lexer for if closing if tag",
+            "itemtype": "property",
+            "name": "IF_END",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'/if:'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 59,
+            "description": "Lexer for if opening loop tag",
+            "itemtype": "property",
+            "name": "LOOP",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'for:'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 68,
+            "description": "The property seperator similar to object \"->\"",
+            "itemtype": "property",
+            "name": "SEP",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'.'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 77,
+            "description": "Lexer for if closing loop tag",
+            "itemtype": "property",
+            "name": "LOOP_END",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'/for:'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Lexer.php",
+            "line": 86,
+            "description": "Lexer for if defining a template",
+            "itemtype": "property",
+            "name": "TEMPLATE",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'template:'",
+            "class": "Lexer",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 20,
+            "description": "The list of valid templates",
+            "itemtype": "property",
+            "name": "_templates",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 27,
+            "description": "The instance of the profiler",
+            "itemtype": "property",
+            "name": "_profiler",
+            "type": "Profiler",
+            "access": "private",
+            "tagname": "",
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 34,
+            "description": "The maximum number of loops to parse before bailing",
+            "itemtype": "property",
+            "name": "limit",
+            "type": "Int",
+            "default": "10000",
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 41,
+            "description": "Create the loader",
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 50,
+            "description": "Add a single template",
+            "itemtype": "method",
+            "name": "addTemplate",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The alias name of the template",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "The full path to the template file",
+                    "type": "String"
+                }
+            ],
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 65,
+            "description": "Register a JSON manfest which is an array that contains template files\nthe templates paths should be relative to the location of the manifest file.",
+            "itemtype": "method",
+            "name": "addManifest",
+            "params": [
+                {
+                    "name": "manifestPath",
+                    "description": "The path of the manifest JSON to autoload",
+                    "type": "String"
+                }
+            ],
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 89,
+            "description": "Load a JSON file from a path, does the error checking",
+            "itemtype": "method",
+            "name": "load",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path to the .json file",
+                    "type": "String"
+                },
+                {
+                    "name": "asAssociate",
+                    "description": "Return as associative array",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "return": {
+                "description": "The native object or array",
+                "type": "Array"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 113,
+            "description": "Get the last JSON error message",
+            "itemtype": "method",
+            "name": "lastJsonError",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The json error message",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 147,
+            "description": "Get a template by name",
+            "itemtype": "method",
+            "name": "getPath",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The template name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The path to the template",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 162,
+            "description": "Get a template content",
+            "itemtype": "method",
+            "name": "getContents",
+            "params": [
+                {
+                    "name": "The",
+                    "description": "name of the template",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The string contents of the template",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 183,
+            "description": "Prepare the site content to be displayed\nThis does all of the data substitutions and url fixes. The order of operations\nis to do the templates, loops, if blocks, then individual substitutions.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "content",
+                    "description": "The content data",
+                    "type": "String"
+                },
+                {
+                    "name": "substitutions",
+                    "description": "The substitutions key => value replaces {{key}} in template",
+                    "type": "Dictionary"
+                }
+            ],
+            "return": {
+                "description": "The parsed template",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 198,
+            "description": "Get the template by form name",
+            "itemtype": "method",
+            "name": "template",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the template as defined in Autoloader",
+                    "type": "String"
+                },
+                {
+                    "name": "substitutions",
+                    "description": "The collection of data to substitute",
+                    "type": "Dictionary",
+                    "optional": true,
+                    "optdefault": "["
+                }
+            ],
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 209,
+            "description": "Check to see if a string contains a sub tag",
+            "itemtype": "method",
+            "name": "contains",
+            "params": [
+                {
+                    "name": "needle",
+                    "description": "The tag name to look for with out the {{}}",
+                    "type": "String"
+                },
+                {
+                    "name": "haystack",
+                    "description": "The string to search in",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "If the tag is in the string",
+                "type": "Boolean"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 221,
+            "description": "Remove the empty substitution tags",
+            "itemtype": "method",
+            "name": "removeEmpties",
+            "params": [
+                {
+                    "name": "content",
+                    "description": "The content string",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The content string",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 234,
+            "description": "Parse a url with substitutions",
+            "itemtype": "method",
+            "name": "parseFile",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The path to the template",
+                    "type": "String"
+                },
+                {
+                    "name": "substitutions",
+                    "description": "The substitutions key => value replaces {{key}} in template",
+                    "type": "Dictionary"
+                }
+            ],
+            "return": {
+                "description": "The parsed template",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 255,
+            "description": "Replaces any path (href/src) with the base",
+            "itemtype": "method",
+            "name": "fixPath",
+            "params": [
+                {
+                    "name": "content",
+                    "description": "The content string",
+                    "type": "String"
+                },
+                {
+                    "name": "basePath",
+                    "description": "The string to prepend all src and href with",
+                    "type": "Dictionary"
+                }
+            ],
+            "return": {
+                "description": "The content with paths fixed",
+                "type": "String"
+            },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 22,
+            "description": "The parse template can't be found",
+            "itemtype": "property",
+            "name": "TEMPLATE_NOT_FOUND",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 30,
+            "description": "There was a problem decoding the JSON",
+            "itemtype": "property",
+            "name": "JSON_DECODE",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 38,
+            "description": "Duplicate named autoload template",
+            "itemtype": "property",
+            "name": "AUTOLOAD_TEMPLATE",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 46,
+            "description": "The template alias is wrong",
+            "itemtype": "property",
+            "name": "TEMPLATE_UNKNOWN",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 54,
+            "description": "The parse substitution is invalid",
+            "itemtype": "property",
+            "name": "PARSE_ARRAY",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 62,
+            "description": "The collection of messages",
+            "itemtype": "property",
+            "name": "messages",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 77,
+            "description": "The label for an error that is unknown or unfound in messages",
+            "itemtype": "property",
+            "name": "UNKNOWN",
+            "type": "Int",
+            "static": 1,
+            "final": 1,
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ParserError.php",
+            "line": 85,
+            "description": "Create the Canteen error",
+            "class": "ParserError",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 14,
+            "description": "Engine is starting the rendering",
+            "itemtype": "property",
+            "name": "MAIN",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'Parse Main'",
+            "class": "ProfilerLabel",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 23,
+            "description": "Engine is rendering template for loop",
+            "itemtype": "property",
+            "name": "LOOP",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'Parse Loop'",
+            "class": "ProfilerLabel",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 32,
+            "description": "Engine is rendering individual substitution tags",
+            "itemtype": "property",
+            "name": "SINGLES",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'Parse Singles'",
+            "class": "ProfilerLabel",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/ProfilerLabel.php",
+            "line": 41,
+            "description": "Engine is rendering conditional tags",
+            "itemtype": "property",
+            "name": "IF",
+            "type": "String",
+            "static": 1,
+            "final": 1,
+            "default": "'Parse Conditional'",
+            "class": "ProfilerLabel",
+            "module": "Canteen\\Parser"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nCreate the loader",
+            "line": " src/Canteen/Parser/Parser.php:41"
+        },
+        {
+            "message": "Missing item type\nCreate the Canteen error",
+            "line": " src/Canteen/Parser/ParserError.php:85"
+        }
+    ]
+}
