@@ -30,13 +30,13 @@ namespace Canteen\Parser
 		const CLOSE = '}}';
 		
 		/**
-		*   Lexer for definition of an if parse tag
-		*   @property {String} IF
+		*   Lexer for definition of an if conditional parse tag
+		*   @property {String} COND
 		*   @static
 		*   @final
 		*   @default 'if:'
 		*/
-		const IF = 'if:';
+		const COND = 'if:';
 		
 		/**
 		*   Lexer for if logical operator
@@ -49,12 +49,12 @@ namespace Canteen\Parser
 		
 		/**
 		*   Lexer for if closing if tag
-		*   @property {String} IF_END
+		*   @property {String} COND_END
 		*   @static
 		*   @final
 		*   @default '/if:'
 		*/
-		const IF_END = '/if:';
+		const COND_END = '/if:';
 		
 		/**
 		*   Lexer for if opening loop tag

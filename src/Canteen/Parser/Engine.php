@@ -35,8 +35,8 @@ namespace Canteen\Parser
 			$pattern = '/'.Lexer::OPEN.'('
 					.Lexer::LOOP.'|'
 					.Lexer::TEMPLATE.'|'
-					.Lexer::IF.'|'
-					.Lexer::IF.Lexer::NOT.
+					.Lexer::COND.'|'
+					.Lexer::COND.Lexer::NOT.
 				')'
 				.'([a-zA-Z0-9\''.Lexer::SEP.']+)'.Lexer::CLOSE.'/';
 				
@@ -63,13 +63,13 @@ namespace Canteen\Parser
 					// Get the tag prefix
 					switch($modifier)
 					{
-						case Lexer::IF :
-						case Lexer::IF.Lexer::NOT :
+						case Lexer::COND :
+						case Lexer::COND.Lexer::NOT :
 						{
-							if($profiler) $profiler->start(ProfilerLabel::IF);
+							if($profiler) $profiler->start(ProfilerLabel::COND);
 
-							$isNot = $modifier == Lexer::IF.Lexer::NOT;
-							$endTag = Lexer::OPEN . Lexer::IF_END 
+							$isNot = $modifier == Lexer::COND.Lexer::NOT;
+							$endTag = Lexer::OPEN . Lexer::COND_END 
 								. ($isNot ? Lexer::NOT : '')
 								. $id . Lexer::CLOSE;
 							
@@ -92,13 +92,15 @@ namespace Canteen\Parser
 							{
 								// Get the contents of if and parse it
 								$buffer = self::parse(
+									$parser,
 									substr($content, $o2, $c2 - $o2),
-									$substitutions
+									$substitutions,
+									$profiler
 								);
 							}
 							// Remove the if statement and it's contents							
 							$content = substr_replace($content, $buffer, $o1, $c1 - $o1);
-							if($profiler) $profiler->end(ProfilerLabel::IF);
+							if($profiler) $profiler->end(ProfilerLabel::COND);
 							break;
 						}
 						case Lexer::LOOP :
@@ -140,7 +142,7 @@ namespace Canteen\Parser
 									error('Parsing for-loop substitution needs to be an array');
 									continue;
 								}
-								$buffer .= self::parse($template, $sub);
+								$buffer .= self::parse($parser, $template, $sub, $profiler);
 							}
 
 							// Replace the template with the buffer

@@ -40,11 +40,11 @@ namespace Canteen\Parser
 
 		/**
 		*   Engine is rendering conditional tags
-		*   @property {String} IF
+		*   @property {String} COND
 		*   @static
 		*   @final
 		*   @default 'Parse Conditional'
 		*/
-		const IF = 'Parse Conditional';
+		const COND = 'Parse Conditional';
 	}
 }
