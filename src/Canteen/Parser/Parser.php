@@ -210,7 +210,7 @@ namespace Canteen\Parser
 		*  This does all of the data substitutions and url fixes. The order of operations
 		*  is to do the templates, loops, if blocks, then individual substitutions. 
 		*  @method parse
-		*  @param {String} content The content data
+		*  @param {String} &content The content data
 		*  @param {Dictionary} substitutions The substitutions key => value replaces {{key}} in template
 		*  @return {String} The parsed template
 		*/
