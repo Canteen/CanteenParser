@@ -178,11 +178,11 @@ namespace Canteen\Parser
 		*  Get a template content 
 		*  @method getContents
 		*  @param {String} The name of the template
-		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*  @param {Boolean} [cache=true] If we should cache the template, good for 
 		*    templates that are requested multiple times.
 		*  @return {String} The string contents of the template
 		*/
-		public function getContents($template, $cache=false)
+		public function getContents($template, $cache=true)
 		{
 			$path = $this->getPath($template);
 			
@@ -224,11 +224,11 @@ namespace Canteen\Parser
 		*  Get the template by form name
 		*  @method template
 		*  @param {String} name The name of the template as defined in Autoloader
-		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*  @param {Boolean} [cache=true] If we should cache the template, good for 
 		*    templates that are requested multiple times.
 		*  @param {Dictionary} [substitutions=[]] The collection of data to substitute
 		*/
-		public function template($name, $substitutions=[], $cache=false)
+		public function template($name, $substitutions=[], $cache=true)
 		{
 			return Engine::parse(
 				$this, 
@@ -268,11 +268,11 @@ namespace Canteen\Parser
 		*  @method parseFile
 		*  @param {String} url The path to the template
 		*  @param {Dictionary} substitutions The substitutions key => value replaces {{key}} in template
-		*  @param {Boolean} [cache=false] If we should cache the template, good for 
+		*  @param {Boolean} [cache=true] If we should cache the template, good for 
 		*    templates that are requested multiple times.
 		*  @return {String} The parsed template
 		*/
-		public function parseFile($url, $substitutions, $cache=false)
+		public function parseFile($url, $substitutions, $cache=true)
 		{			
 			// Check to see if file exists in cache
 			if (isset($this->_cache[$path])) 
