@@ -168,6 +168,13 @@ Located in the namespace <strong>Canteen\Parser</strong>.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_flush">flush</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_getContents">getContents</a>
 
                                 
@@ -239,6 +246,13 @@ Located in the namespace <strong>Canteen\Parser</strong>.</p>
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property__cache">_cache</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item property private">
                                 <a href="#property__profiler">_profiler</a>
@@ -718,6 +732,57 @@ the templates paths should be relative to the location of the manifest file.</p>
 </div>
 
                 
+                    <div id="method_flush" class="method item">
+    <h3 class="name"><code>flush</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Clear the cache</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_getContents" class="method item">
     <h3 class="name"><code>getContents</code></h3>
 
@@ -728,6 +793,12 @@ the templates paths should be relative to the location of the manifest file.</p>
                 <li class="arg">
                     
                         <code>The</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[cache=false]</code>
                     
                 </li>
             
@@ -791,6 +862,24 @@ the templates paths should be relative to the location of the manifest file.</p>
 
                     <div class="param-description">
                         <p>name of the template</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[cache=false]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>If we should cache the template, good for 
+  templates that are requested multiple times.</p>
 
                     </div>
 
@@ -1132,7 +1221,7 @@ the templates paths should be relative to the location of the manifest file.</p>
             
                 <li class="arg">
                     
-                        <code>content</code>
+                        <code>&amp;content</code>
                     
                 </li>
             
@@ -1196,7 +1285,7 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">content</code>
+                        <code class="param-name">&amp;content</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
 
@@ -1266,6 +1355,12 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
                 <li class="arg">
                     
                         <code>substitutions</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[cache=false]</code>
                     
                 </li>
             
@@ -1345,6 +1440,24 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
 
                     <div class="param-description">
                         <p>The substitutions key =&gt; value replaces  in template</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[cache=false]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>If we should cache the template, good for 
+  templates that are requested multiple times.</p>
 
                     </div>
 
@@ -1577,6 +1690,12 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
             
                 <li class="arg">
                     
+                        <code class="optional">[cache=false]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
                         <code class="optional">[substitutions=[]</code>
                     
                 </li>
@@ -1645,6 +1764,24 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
             
                 <li class="param">
                     
+                        <code class="param-name optional">[cache=false]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>If we should cache the template, good for 
+  templates that are requested multiple times.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
                         <code class="param-name optional">[substitutions=[]</code>
                         <span class="type">Dictionary</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
@@ -1676,6 +1813,49 @@ is to do the templates, loops, if blocks, then individual substitutions.</p>
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__cache" class="property item">
+    <h3 class="name"><code>_cache</code></h3>
+    <span class="type">Dictionary</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+            
+        
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The map of file name to template contents</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> []</p>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property__profiler" class="property item private">

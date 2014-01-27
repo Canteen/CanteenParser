@@ -203,7 +203,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 191,
+            "line": 193,
             "description": "Get the nested value for a dot-syntax array/object lookup\nFor instance, `getNextVar($substitutions, 'event.name')`",
             "itemtype": "method",
             "name": "lookupValue",
@@ -230,7 +230,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 221,
+            "line": 223,
             "description": "Global functions to check for a string-based boolean",
             "itemtype": "method",
             "name": "asBoolean",
@@ -251,7 +251,7 @@
         },
         {
             "file": "src/Canteen/Parser/Engine.php",
-            "line": 235,
+            "line": 237,
             "description": "The default backtrack limit for preg expressions is 100KB, \nwe may have pages which ar larger than 100,000, and \nneed to increase the pcre.backtrack_limit",
             "itemtype": "method",
             "name": "checkBacktrackLimit",
@@ -295,9 +295,9 @@
         {
             "file": "src/Canteen/Parser/Lexer.php",
             "line": 32,
-            "description": "Lexer for definition of an if parse tag",
+            "description": "Lexer for definition of an if conditional parse tag",
             "itemtype": "property",
-            "name": "IF",
+            "name": "COND",
             "type": "String",
             "static": 1,
             "final": 1,
@@ -323,7 +323,7 @@
             "line": 50,
             "description": "Lexer for if closing if tag",
             "itemtype": "property",
-            "name": "IF_END",
+            "name": "COND_END",
             "type": "String",
             "static": 1,
             "final": 1,
@@ -420,14 +420,25 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 39,
-            "description": "Create the loader",
+            "line": 40,
+            "description": "The map of file name to template contents",
+            "itemtype": "property",
+            "name": "_cache",
+            "type": "Dictionary",
+            "default": "[]",
             "class": "Parser",
             "module": "Canteen\\Parser"
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
             "line": 47,
+            "description": "Create the loader",
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 55,
             "description": "Attach an optional Profiler to the parser for debugging purposes",
             "itemtype": "method",
             "name": "setProfiler",
@@ -443,7 +454,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 57,
+            "line": 65,
             "description": "Add a single template",
             "itemtype": "method",
             "name": "addTemplate",
@@ -464,7 +475,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 72,
+            "line": 80,
             "description": "Register a JSON manfest which is an array that contains template files\nthe templates paths should be relative to the location of the manifest file.",
             "itemtype": "method",
             "name": "addManifest",
@@ -480,7 +491,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 96,
+            "line": 104,
             "description": "Load a JSON file from a path, does the error checking",
             "itemtype": "method",
             "name": "load",
@@ -509,7 +520,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 120,
+            "line": 128,
             "description": "Get the last JSON error message",
             "itemtype": "method",
             "name": "lastJsonError",
@@ -524,7 +535,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 154,
+            "line": 162,
             "description": "Get a template by name",
             "itemtype": "method",
             "name": "getPath",
@@ -544,7 +555,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 169,
+            "line": 177,
             "description": "Get a template content",
             "itemtype": "method",
             "name": "getContents",
@@ -553,6 +564,13 @@
                     "name": "The",
                     "description": "name of the template",
                     "type": "String"
+                },
+                {
+                    "name": "cache",
+                    "description": "If we should cache the template, good for \n  templates that are requested multiple times.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
                 }
             ],
             "return": {
@@ -564,13 +582,13 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 190,
+            "line": 208,
             "description": "Prepare the site content to be displayed\nThis does all of the data substitutions and url fixes. The order of operations\nis to do the templates, loops, if blocks, then individual substitutions.",
             "itemtype": "method",
             "name": "parse",
             "params": [
                 {
-                    "name": "content",
+                    "name": "&content",
                     "description": "The content data",
                     "type": "String"
                 },
@@ -589,7 +607,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 205,
+            "line": 223,
             "description": "Get the template by form name",
             "itemtype": "method",
             "name": "template",
@@ -598,6 +616,13 @@
                     "name": "name",
                     "description": "The name of the template as defined in Autoloader",
                     "type": "String"
+                },
+                {
+                    "name": "cache",
+                    "description": "If we should cache the template, good for \n  templates that are requested multiple times.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
                 },
                 {
                     "name": "substitutions",
@@ -612,7 +637,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 216,
+            "line": 241,
             "description": "Check to see if a string contains a sub tag",
             "itemtype": "method",
             "name": "contains",
@@ -637,7 +662,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 228,
+            "line": 253,
             "description": "Remove the empty substitution tags",
             "itemtype": "method",
             "name": "removeEmpties",
@@ -657,7 +682,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 241,
+            "line": 266,
             "description": "Parse a url with substitutions",
             "itemtype": "method",
             "name": "parseFile",
@@ -671,6 +696,13 @@
                     "name": "substitutions",
                     "description": "The substitutions key => value replaces {{key}} in template",
                     "type": "Dictionary"
+                },
+                {
+                    "name": "cache",
+                    "description": "If we should cache the template, good for \n  templates that are requested multiple times.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
                 }
             ],
             "return": {
@@ -682,7 +714,7 @@
         },
         {
             "file": "src/Canteen/Parser/Parser.php",
-            "line": 262,
+            "line": 297,
             "description": "Replaces any path (href/src) with the base",
             "itemtype": "method",
             "name": "fixPath",
@@ -702,6 +734,15 @@
                 "description": "The content with paths fixed",
                 "type": "String"
             },
+            "class": "Parser",
+            "module": "Canteen\\Parser"
+        },
+        {
+            "file": "src/Canteen/Parser/Parser.php",
+            "line": 315,
+            "description": "Clear the cache",
+            "itemtype": "method",
+            "name": "flush",
             "class": "Parser",
             "module": "Canteen\\Parser"
         },
@@ -842,7 +883,7 @@
             "line": 41,
             "description": "Engine is rendering conditional tags",
             "itemtype": "property",
-            "name": "IF",
+            "name": "COND",
             "type": "String",
             "static": 1,
             "final": 1,
@@ -854,7 +895,7 @@
     "warnings": [
         {
             "message": "Missing item type\nCreate the loader",
-            "line": " src/Canteen/Parser/Parser.php:39"
+            "line": " src/Canteen/Parser/Parser.php:47"
         },
         {
             "message": "Missing item type\nCreate the Canteen error",
