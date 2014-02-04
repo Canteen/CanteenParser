@@ -275,23 +275,23 @@ namespace Canteen\Parser
 		public function parseFile($url, $substitutions, $cache=true)
 		{			
 			// Check to see if file exists in cache
-			if (isset($this->_cache[$path])) 
-				return $this->_cache[$path];
+			if (isset($this->_cache[$url])) 
+				return $this->_cache[$url];
 
-			$contents = @file_get_contents($path);
+			$contents = @file_get_contents($url);
 			
 			// If there's no file, don't do the rest of the regexps
 			if ($contents === false)
 			{
-				throw new ParserError(ParserError::TEMPLATE_NOT_FOUND, $path);
+				throw new ParserError(ParserError::TEMPLATE_NOT_FOUND, $url);
 			}
 			else if ($cache)
 			{
-				$this->_cache[$path] = $contents;
+				$this->_cache[$url] = $contents;
 			}
 			
 			// Do a regular parse with the string
-			return Engine::parse($this, $content, $substitutions, $this->_profiler);
+			return Engine::parse($this, $contents, $substitutions, $this->_profiler);
 		}
 		
 		/**
