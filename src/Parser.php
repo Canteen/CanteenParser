@@ -50,6 +50,7 @@ namespace Canteen\Parser
 		public function __construct()
 		{
 			$this->_templates = [];
+			$this->_profiler = new EmptyProfiler;
 		}
 
 		/**
@@ -57,8 +58,16 @@ namespace Canteen\Parser
 		*  @method setProfiler
 		*  @param {Profiler} profiler
 		*/
-		public function setProfiler(Profiler $profiler)
+		public function setProfiler($profiler)
 		{
+			if (!method_exists($profiler, 'start'))
+			{
+				throw new ParserError(ParserError::PROFILER_METHOD, 'start');
+			}
+			if (!method_exists($profiler, 'end'))
+			{
+				throw new ParserError(ParserError::PROFILER_METHOD, 'end');
+			}
 			$this->_profiler = $profiler;
 		}
 		

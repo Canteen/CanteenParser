@@ -21,10 +21,10 @@ namespace Canteen\Parser
 		*  @static
 		*  @param {String} content The content data
 		*  @param {Dictionary} substitutions The substitutions key => value replaces {{key}} in template
-		*  @param {Profiler} [profiler=null] Optional profiler usage to track performance
+		*  @param {Profiler} profiler Optional profiler usage to track performance
 		*  @return {String} The parsed template
 		*/
-		public static function parse(Parser $parser, $content, $substitutions, Profiler $profiler=null)
+		public static function parse(Parser $parser, $content, $substitutions, $profiler)
 		{
 			self::checkBacktrackLimit($content);
 			
@@ -43,8 +43,8 @@ namespace Canteen\Parser
 			preg_match_all($pattern, $content, $matches);
 			
 			if (count($matches))
-			{			
-				if ($profiler) $profiler->start(ProfilerLabel::MAIN);
+			{
+				$profiler->start(ProfilerLabel::MAIN);
 				
 				// length of opening and closing
 				$closeLen = strlen(Lexer::CLOSE);
@@ -158,7 +158,7 @@ namespace Canteen\Parser
 						}
 					}
 				}
-				if ($profiler) $profiler->end(ProfilerLabel::MAIN);
+				$profiler->end(ProfilerLabel::MAIN);
 			}
 			
 			$pattern = '/'.Lexer::OPEN.'([a-zA-Z0-9\''.Lexer::SEP.']+)'.Lexer::CLOSE.'/';
@@ -166,7 +166,7 @@ namespace Canteen\Parser
 			
 			if (count($matches))
 			{
-				if ($profiler) $profiler->start(ProfilerLabel::SINGLES);
+				$profiler->start(ProfilerLabel::SINGLES);
 
 				foreach($matches[0] as $i=>$tag)
 				{
@@ -185,7 +185,7 @@ namespace Canteen\Parser
 					
 					$content = preg_replace('/'.$tag.'/', (string)$value, $content);
 				}
-				if ($profiler) $profiler->end(ProfilerLabel::SINGLES);
+				$profiler->end(ProfilerLabel::SINGLES);
 			}
 			return $content;
 		}

@@ -58,6 +58,14 @@ namespace Canteen\Parser
 		*  @final
 		*/
 		const PARSE_ARRAY = 125;
+
+		/** 
+		*  Profiler requires method
+		*  @property {int} PROFILER_METHOD
+		*  @static
+		*  @final
+		*/
+		const PROFILER_METHOD = 126;
 		
 		/**
 		*  The collection of messages
@@ -71,7 +79,8 @@ namespace Canteen\Parser
 			self::TEMPLATE_NOT_FOUND => 'Cannot load template file',
 			self::TEMPLATE_UNKNOWN => 'Template not registered',
 			self::AUTOLOAD_TEMPLATE => 'Template has already been loaded',
-			self::PARSE_ARRAY => 'The parse substitution value \'%s\' cannot be an array \'%s\''
+			self::PARSE_ARRAY => 'The parse substitution value \'%s\' cannot be an array \'%s\'',
+			self::PROFILER_METHOD => 'The profiler object much contain the method \'%s\''
 		];
 		
 		/** 
