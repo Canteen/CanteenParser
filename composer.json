@@ -1,12 +1,12 @@
 {
     "name": "canteen/parser",
 	"description" : "Simple engine for rendering HTML templates.",
-	"version" : "1.0.1",
+	"version" : "1.0.2",
     "type": "library",
 	"keywords": ["templating", "view", "markup", "mvc"],
     "license": "MIT",
 	"homepage" : "http://github.com/Canteen/CanteenParser",
-	"time": "2013-10-12",
+	"time": "2014-02-22",
 	"authors": [
         {
             "name": "Matt Karl",
