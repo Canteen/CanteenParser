@@ -92,8 +92,9 @@ namespace Canteen\Parser
 		*  the templates paths should be relative to the location of the manifest file.
 		*  @method addManifest
 		*  @param {String} manifestPath The path of the manifest JSON to autoload
+		*  @param {Boolean} [overrideAll=false] If we should override all templates
 		*/
-		public function addManifest($manifestPath)
+		public function addManifest($manifestPath, $overrideAll=false)
 		{			
 			// Load the manifest json
 			$templates = $this->load($manifestPath, false);
@@ -106,7 +107,7 @@ namespace Canteen\Parser
 			{
 				foreach($templates as $t)
 				{
-					$override = false;
+					$override = $overrideAll;
 					if (is_object($t))
 					{
 						$override = $t->override;
