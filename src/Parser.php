@@ -76,10 +76,11 @@ namespace Canteen\Parser
 		*  @method addTemplate
 		*  @param {String} name The alias name of the template
 		*  @param {String} path The full path to the template file
+		*  @param {Boolean} [override=false] Override an existing template
 		*/
-		public function addTemplate($name, $path)
+		public function addTemplate($name, $path, $override=false)
 		{
-			if (isset($this->_templates[$name]))
+			if (!$override && isset($this->_templates[$name]))
 			{
 				throw new ParserError(ParserError::AUTOLOAD_TEMPLATE, $name);
 			}
@@ -105,7 +106,13 @@ namespace Canteen\Parser
 			{
 				foreach($templates as $t)
 				{
-					$this->addTemplate(basename($t, '.html'), $dir . $t);
+					$override = false;
+					if (is_object($t))
+					{
+						$override = $t->override;
+						$t = $t->src;
+					}
+					$this->addTemplate(basename($t, '.html'), $dir . $t, $override);
 				}
 			}
 		}
