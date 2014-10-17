@@ -1,7 +1,7 @@
 {
     "name": "canteen/parser",
 	"description" : "Simple engine for rendering HTML templates.",
-	"version" : "1.0.4",
+	"version" : "1.1.0",
     "type": "library",
 	"keywords": ["templating", "view", "markup", "mvc"],
     "license": "MIT",

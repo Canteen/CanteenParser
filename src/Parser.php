@@ -310,24 +310,6 @@ namespace Canteen\Parser
 			// Do a regular parse with the string
 			return Engine::parse($this, $contents, $substitutions, $this->_profiler);
 		}
-		
-		/**
-		*  Replaces any path (href/src) with the base
-		*  @method fixPath
-		*  @param {String} content The content string
-		*  @param {Dictionary} basePath The string to prepend all src and href with
-		*  @return {String} The content with paths fixed
-		*/
-		public function fixPath(&$content, $basePath)
-		{
-			// Replace the path to the stuff
-			$content = preg_replace(
-				'/(href|src)=["\']([^\/][^:"\']*)["\']/', 
-				'$1="'.$basePath.'$2"', 
-				$content
-			);
-			return $content;
-		}
 
 		/**
 		*  Clear the cache
