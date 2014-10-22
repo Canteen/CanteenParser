@@ -270,7 +270,7 @@ namespace Canteen\Parser
 					.self::fix(Lexer::COND_END.Lexer::NOT).
 				')\2'.
 				self::fix(Lexer::CLOSE).
-				'/', '', $content);
+				'/s', '', $content);
 
 			return $content;
 		}
