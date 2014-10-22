@@ -275,11 +275,10 @@ namespace Canteen\Parser
 		*/
 		public function removeEmpties(&$content)
 		{
-			Engine::checkBacktrackLimit($content);
-			$content = preg_replace('/\{\{[^\}]+\}\}/', '', $content);
+			$content = Engine::removeEmpties($content);
 			return $content;
 		}
-		
+
 		/**
 		*  Parse a url with substitutions
 		*  @method parseFile

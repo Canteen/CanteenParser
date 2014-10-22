@@ -32,13 +32,13 @@ namespace Canteen\Parser
 			if (empty($content)) return $content;
 			
 			// Search pattern for all
-			$pattern = '/'.Lexer::OPEN.'('
-					.Lexer::LOOP.'|'
-					.Lexer::TEMPLATE.'|'
-					.Lexer::COND.'|'
-					.Lexer::COND.Lexer::NOT.
+			$pattern = '/'.self::fix(Lexer::OPEN).'('
+					.self::fix(Lexer::LOOP).'|'
+					.self::fix(Lexer::TEMPLATE).'|'
+					.self::fix(Lexer::COND).'|'
+					.self::fix(Lexer::COND.Lexer::NOT).
 				')'
-				.'([a-zA-Z0-9\''.Lexer::SEP.']+)'.Lexer::CLOSE.'/';
+				.'([a-zA-Z0-9'.self::fix(Lexer::SEP).']+)'.self::fix(Lexer::CLOSE).'/';
 				
 			preg_match_all($pattern, $content, $matches);
 			
@@ -75,6 +75,9 @@ namespace Canteen\Parser
 							
 							// Remove the tags if content is true
 							$value = self::lookupValue($substitutions, $id);
+
+							// Ignore tags that don't exist
+							if ($value === null) continue;
 							
 							// The position order $o1{{if:}}$o2...$c2{{/if:}}$c1
 							$c2 = strpos($content, $endTag);
@@ -232,6 +235,57 @@ namespace Canteen\Parser
 			if (is_array($str)) return (boolean)$str;
 			$str = $str ? (string)$str : 'false';
 			return (strtolower(trim($str)) === 'false') ? false : (boolean)$str;
+		}
+
+		/**
+		*  Remove the empty substitution tags
+		*  @method removeEmpties 
+		*  @static
+		*  @param {String} content The content string
+		*  @return {String} The content string
+		*/
+		public static function removeEmpties($content)
+		{
+			self::checkBacktrackLimit($content);
+
+			// Remove the single tags and templates
+			$content = preg_replace('/'.
+				self::fix(Lexer::OPEN).
+				'('.self::fix(Lexer::TEMPLATE).')?'.
+				'([a-zA-Z0-9\''.self::fix(Lexer::SEP).']+)'.
+				self::fix(Lexer::CLOSE).'/', '', $content);
+
+			// Remove the loops and conditional tags
+			// and their contents
+			$content = preg_replace('/'.
+				self::fix(Lexer::OPEN).'('
+					.self::fix(Lexer::LOOP).'|'
+					.self::fix(Lexer::COND).'|'
+					.self::fix(Lexer::COND.Lexer::NOT).
+				')([a-zA-Z0-9'.self::fix(Lexer::SEP).']+)'.
+				self::fix(Lexer::CLOSE).'.*?'.
+				self::fix(Lexer::OPEN).'('
+					.self::fix(Lexer::LOOP_END).'|'
+					.self::fix(Lexer::COND_END).'|'
+					.self::fix(Lexer::COND_END.Lexer::NOT).
+				')\2'.
+				self::fix(Lexer::CLOSE).
+				'/', '', $content);
+
+			return $content;
+		}
+
+		/**
+		*  Convert a lexer piece for use in a regular expression
+		*  @method fix
+		*  @static
+		*  @private
+		*  @param {String} string The unsafe regex piece
+		*  @param {String} The regex ready string
+		*/
+		private static function fix($part)
+		{
+			return preg_replace('/[\/\{\}\.\-\:\!]/', '\\\$0', $part);
 		}
 
 		/**
